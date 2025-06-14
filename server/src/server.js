@@ -1,3 +1,4 @@
+import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 
@@ -14,13 +15,19 @@ app.set('trust proxy', 1);
 dotenv.config();
 const port = process.env.PORT || 3000;
 
+app.use(cors({
+  origin: 'http://localhost:5173',
+}));
+
+
 app.use(express.json());
+
+
 app.use(rateLimiter); // must come before any of my routes
+
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-app.use((req, res, next) => {
-  console.log(`Request method is: ${req.method} and request URL is: ${req.url}`);
-  next();
-})
+
 app.use('/api/notes', noteRoutes);
 
 
