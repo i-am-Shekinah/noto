@@ -1,5 +1,15 @@
 @import "tailwindcss";
 @plugin 'daisyui' {
-  themes: light --default, dark --prefersdark, forest;
+  themes: light --default, dark --prefersdark;
   /* themes: forest; */
+}
+
+@layer components {
+  .custom-btn-primary {
+    @apply btn bg-green-400 text-black rounded-full;
+  }
+
+  .custom-btn-primary-outline {
+    @apply btn border-green-400 hover:bg-green-400 hover:border-0 hover:text-black rounded-full;
+  }
 }
